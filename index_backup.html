@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>陸上アカデミア Zoom面談スケジュール（完全版）</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Yu Gothic', 'Hiragino Sans', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            padding: 30px 40px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .summary-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .summary-card .label {
+            font-size: 14px;
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+        
+        .summary-card .value {
+            font-size: 28px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .summary-card.highlight .value {
+            color: #28a745;
+        }
+        
+        .tabs {
+            display: flex;
+            background: #f8f9fa;
+            padding: 0 40px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .tab {
+            padding: 15px 30px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 16px;
+            font-weight: 500;
+            color: #6c757d;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .tab:hover {
+            color: #667eea;
+        }
+        
+        .tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 40px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .schedule-grid {
+            display: grid;
+            gap: 20px;
+        }
+        
+        .schedule-item {
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        
+        .schedule-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .schedule-item.existing-student {
+            background: #e7f3ff;
+            border-left-color: #28a745;
+        }
+        
+        .schedule-date {
+            font-size: 18px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .schedule-item.existing-student .schedule-date {
+            color: #28a745;
+        }
+        
+        .schedule-time {
+            font-size: 16px;
+            color: #495057;
+            margin-bottom: 5px;
+        }
+        
+        .schedule-name {
+            font-size: 16px;
+            color: #212529;
+            font-weight: 500;
+        }
+        
+        .schedule-id {
+            font-size: 14px;
+            color: #6c757d;
+        }
+        
+        .duration-badge {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        
+        .contact-needed {
+            background: #fff3cd;
+            border-left-color: #ffc107;
+        }
+        
+        .reason {
+            font-size: 14px;
+            color: #dc3545;
+            margin-top: 10px;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            color: #6c757d;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .summary {
+                grid-template-columns: 1fr;
+            }
+            
+            .tabs {
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏃 陸上アカデミア Zoom面談スケジュール（完全版）</h1>
+            <p>2025年度 オンラインスクールセールス日程</p>
+        </div>
+        
+        <div class="summary">
+            <div class="summary-card">
+                <div class="label">総参加者数</div>
+                <div class="value">30名</div>
+            </div>
+            <div class="summary-card">
+                <div class="label">確定スケジュール</div>
+                <div class="value">23名</div>
+            </div>
+            <div class="summary-card">
+                <div class="label">個別連絡が必要</div>
+                <div class="value">6名</div>
+            </div>
+            <div class="summary-card">
+                <div class="label">成功率</div>
+                <div class="value">77%</div>
+            </div>
+            <div class="summary-card highlight">
+                <div class="label">最早開始時刻</div>
+                <div class="value">10:00</div>
+            </div>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="showTab(event, 'schedule')">確定スケジュール</button>
+            <button class="tab" onclick="showTab(event, 'adjustments')">調整履歴</button>
+            <button class="tab" onclick="showTab(event, 'contact')">個別連絡が必要</button>
+        </div>
+        
+        <div id="schedule" class="tab-content active">
+            <div class="schedule-grid">
+
+                <div class="schedule-item">
+                    <div class="schedule-date">2025-11-28 (金)</div>
+                    <div class="schedule-time">⏰ 16:00 - 17:30</div>
+                    <div class="schedule-name">👤 川村 桃香</div>
+                    <div class="schedule-id">ID: 9</div>
+                </div>
+
+                <div class="schedule-item">
+                    <div class="schedule-date">2025-11-29 (土)</div>
+                    <div class="schedule-time">⏰ 13:30 - 15:00</div>
+                    <div class="schedule-name">👤 悠子 木下</div>
+                    <div class="schedule-id">ID: 22</div>
+                </div>
+
+                <div class="schedule-item existing-student">
+                    <div class="schedule-date">2025-11-30 (日)<span class="duration-badge">既存生・1時間</span></div>
+                    <div class="schedule-time">⏰ 12:00 - 13:00</div>
+                    <div class="schedule-name">👤 石橋 麻希子</div>
+                    <div class="schedule-id">ID: 4</div>
+                </div>
+
+                <div class="schedule-item">
+                    <div class="schedule-date">2025-11-30 (日)</div>
+                    <div class="schedule-time">⏰ 13:30 - 15:00</div>
+                    <div class="schedule-name">👤 齋藤</div>
+                    <div class="schedule-id">ID: 20</div>
+                </div>
+
+                <div class="schedule-item">
+                    <div class="schedule-date">2025-11-30 (日)</div>
+                    <div class="schedule-time">⏰ 15:00 - 16:30</div>
+                    <div class="schedule-name">👤 阿部 宏史</div>
+                    <div class="schedule-id">ID: 1</div>
+                </div>
+
+                <div class="schedule-item">
+                    <div class="schedule-date">2025-11-30 (日)</div>
+                    <div class="schedule-time">⏰ 18:30 - 20:00</div>
+                    <div class="schedule-name">👤 服部 あい</div>
+                    <div class="schedule-id">ID: 16</div>
+                </div>
+
+                <div class="schedule-item">
+                    <div class="schedule-date">2025-12-01 (月)</div>
+                    <div class="schedule-time">⏰ 17:30 - 19:00</div>
+                    <div class="schedule-name">👤 望月 雅貴</div>
+                    <div class="schedule-id">ID: 29</div>
+                </div>
+
+                <div class="schedule-item">
+                    <div class="schedule-date">2025-12-04 (木)</div>
+                    <div class="schedule-time">⏰ 15:00 - 16:30</div>
+                    <div class="schedule-name">👤 内野</div>
+                    <div class="schedule-id">ID: 14</div>
+                </div>
+
+                <div class="schedule-item">
+                    <div class="schedule-date">2025-12-04 (木)</div>
+                    <div class="schedule-time">⏰ 17:30 - 19:00</div>
+                    <div class="schedule-name">👤 酒屋 恵理</div>
+                    <div class="schedule-id">ID: 7</div>
+                </div>
+
+                <div class="schedule-item">
+                    <div class="schedule-date">2025-12-06 (土)</div>
+                    <div class="schedule-time">⏰ 13:00 - 14:30</div>
+                    <div class="schedule-name">👤 板村</div>
+                    <div class="schedule-id">ID: 19</div>
+                </div>
+
+                <div class="schedule-item existing-student">
+                    <div class="schedule-date">2025-12-06 (土)<span class="duration-badge">既存生・1時間</span></div>
+                    <div class="schedule-time">⏰ 16:30 - 17:30</div>
+                    <div class="schedule-name">👤 佐藤 研一</div>
+                    <div class="schedule-id">ID: 23</div>
+                </div>
+
+                <div class="schedule-item">
+                    <div class="schedule-date">2025-12-09 (火)</div>
+                    <div class="schedule-time">⏰ 19:30 - 21:00</div>
+                    <div class="schedule-name">👤 名前なし</div>
+                    <div class="schedule-id">ID: 13</div>
+                </div>
+
+                <div class="schedule-item">
+                    <div class="schedule-date">2025-12-10 (水)</div>
+                    <div class="schedule-time">⏰ 19:30 - 21:00</div>
+                    <div class="schedule-name">👤 米山</div>
+                    <div class="schedule-id">ID: 8</div>
+                </div>
+
+                <div class="schedule-item existing-student">
+                    <div class="schedule-date">2025-12-11 (木)<span class="duration-badge">既存生・1時間</span></div>
+                    <div class="schedule-time">⏰ 17:00 - 18:00</div>
+                    <div class="schedule-name">👤 井下田、5. ありがとうございました。走りについて論理的な説明を初めて聞いて勉強になりました。ただ走っていた時代からすると、聞いただけでも早く走れそうな気がします。 征嗣</div>
+                    <div class="schedule-id">ID: 18</div>
+                </div>
+
+                <div class="schedule-item">
+                    <div class="schedule-date">2025-12-15 (日)</div>
+                    <div class="schedule-time">⏰ 19:00 - 20:30</div>
+                    <div class="schedule-name">👤 青柳</div>
+                    <div class="schedule-id">ID: 5</div>
+                </div>
+
+                <div class="schedule-item">
+                    <div class="schedule-date">2025-12-16 (火)</div>
+                    <div class="schedule-time">⏰ 18:30 - 20:00</div>
+                    <div class="schedule-name">👤 名前なし</div>
+                    <div class="schedule-id">ID: 15</div>
+                </div>
+
+                <div class="schedule-item existing-student">
+                    <div class="schedule-date">2025-12-17 (水)<span class="duration-badge">既存生・1時間</span></div>
+                    <div class="schedule-time">⏰ 10:00 - 11:00</div>
+                    <div class="schedule-name">👤 藤川</div>
+                    <div class="schedule-id">ID: 25</div>
+                </div>
+
+                <div class="schedule-item">
+                    <div class="schedule-date">2025-12-18 (木)</div>
+                    <div class="schedule-time">⏰ 13:30 - 15:00</div>
+                    <div class="schedule-name">👤 寺崎 英利子</div>
+                    <div class="schedule-id">ID: 12</div>
+                </div>
+
+                <div class="schedule-item">
+                    <div class="schedule-date">2025-12-18 (木)</div>
+                    <div class="schedule-time">⏰ 17:30 - 19:00</div>
+                    <div class="schedule-name">👤 仲井さやか</div>
+                    <div class="schedule-id">ID: 21</div>
+                </div>
+
+                <div class="schedule-item existing-student">
+                    <div class="schedule-date">2025-12-20 (土)<span class="duration-badge">既存生・1時間</span></div>
+                    <div class="schedule-time">⏰ 16:30 - 17:30</div>
+                    <div class="schedule-name">👤 山下 真由美</div>
+                    <div class="schedule-id">ID: 11</div>
+                </div>
+
+                <div class="schedule-item">
+                    <div class="schedule-date">2025-12-21 (日)</div>
+                    <div class="schedule-time">⏰ 13:00 - 14:30</div>
+                    <div class="schedule-name">👤 伊藤</div>
+                    <div class="schedule-id">ID: 24</div>
+                </div>
+
+                <div class="schedule-item">
+                    <div class="schedule-date">2025-12-22 (月)</div>
+                    <div class="schedule-time">⏰ 10:00 - 11:30</div>
+                    <div class="schedule-name">👤 河田 彩世</div>
+                    <div class="schedule-id">ID: 26</div>
+                </div>
+
+                <div class="schedule-item">
+                    <div class="schedule-date">2025-12-23 (火)</div>
+                    <div class="schedule-time">⏰ 17:00 - 18:30</div>
+                    <div class="schedule-name">👤 名前なし</div>
+                    <div class="schedule-id">ID: 30</div>
+                </div>
+
+            </div>
+        </div>
+        
+        <div id="adjustments" class="tab-content">
+            <div class="schedule-grid">
+                <div class="schedule-item">
+                    <div class="schedule-date">📝 ID:2と3の重複削除</div>
+                    <div class="schedule-time">対象: 仲宗根 真理さん</div>
+                    <div class="reason">同一人物が重複登録されていたため削除。別途日程調整が必要。</div>
+                </div>
+                <div class="schedule-item existing-student">
+                    <div class="schedule-date">⏱️ 既存スクール生の1時間枠化</div>
+                    <div class="schedule-time">対象: ID 4, 23, 18, 25, 11 (5名)</div>
+                    <div class="schedule-time">石橋麻希子、佐藤研一、井下田征嗣、藤川、山下真由美</div>
+                    <div class="reason">既存スクール生のため、面談時間を1.5時間→1時間に短縮</div>
+                </div>
+                <div class="schedule-item">
+                    <div class="schedule-date">📅 内川様の制約反映</div>
+                    <div class="schedule-time">内野さん: 11/27 15:00-16:30 → 12/4 15:00-16:30</div>
+                    <div class="schedule-time">米山さん: 12/2 19:30-21:00 → 12/10 19:30-21:00</div>
+                    <div class="reason">内川様の予定制約により日程変更</div>
+                </div>
+                <div class="schedule-item">
+                    <div class="schedule-date">🌅 朝9時スタートの回避</div>
+                    <div class="schedule-time">齋藤さん: 11/29 09:00-10:30 → 11/30 13:30-15:00</div>
+                    <div class="schedule-time">青柳さん: 12/8 09:00-10:30 → 12/15 19:00-20:30</div>
+                    <div class="schedule-time">名前なし: 12/23 09:00-10:30 → 12/23 17:00-18:30</div>
+                    <div class="reason">内川様が朝早くから働かなくて済むよう、3名を午後以降に移動</div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="contact" class="tab-content">
+            <div class="schedule-grid">
+                <div class="schedule-item contact-needed">
+                    <div class="schedule-date">⚠️ 仲宗根 真理 (ID: 2)</div>
+                    <div class="schedule-time">希望: 2025-11-30 9:00-12:00</div>
+                    <div class="reason">❌ ID:2と3が重複していたため削除。別途日程調整が必要</div>
+                </div>
+
+                <div class="schedule-item contact-needed">
+                    <div class="schedule-date">⚠️ 原武 翔子 (ID: 6)</div>
+
+                    <div class="schedule-time">優先度1: 2025-12-06 10:30-16:00</div>
+                    <div class="reason">❌ 2025-12-06は土日午前中(12月以降)</div>
+
+                    <div class="schedule-time">優先度2: 2025-12-13 10:30-16:00</div>
+                    <div class="reason">❌ 2025-12-13は不可日(12/12-14); 2025-12-13は土日午前中(12月以降)</div>
+
+                    <div class="schedule-time">優先度3: 2025-12-07 08:00-11:00</div>
+                    <div class="reason">❌ 2025-12-07は土日午前中(12月以降)</div>
+
+                </div>
+
+                <div class="schedule-item contact-needed">
+                    <div class="schedule-date">⚠️ 井戸 康雄 (ID: 10)</div>
+
+                    <div class="schedule-time">優先度1: 2025-12-07 09:00-21:00</div>
+                    <div class="reason">❌ 2025-12-07は土日午前中(12月以降)</div>
+
+                    <div class="schedule-time">優先度2: 2025-12-13 09:00-21:00</div>
+                    <div class="reason">❌ 2025-12-13は不可日(12/12-14); 2025-12-13は土日午前中(12月以降)</div>
+
+                    <div class="schedule-time">優先度3: 2025-12-14 09:00-12:00</div>
+                    <div class="reason">❌ 2025-12-14は不可日(12/12-14); 2025-12-14は土日午前中(12月以降)</div>
+
+                </div>
+
+                <div class="schedule-item contact-needed">
+                    <div class="schedule-date">⚠️ 名前なし (ID: 17)</div>
+
+                    <div class="schedule-time">優先度1: 2025-12-06 10:30-12:00</div>
+                    <div class="reason">❌ 2025-12-06は土日午前中(12月以降)</div>
+
+                    <div class="schedule-time">優先度2: 2025-12-07 10:30-12:00</div>
+                    <div class="reason">❌ 2025-12-07は土日午前中(12月以降)</div>
+
+                    <div class="schedule-time">優先度3: 2025-12-14 09:00-21:00</div>
+                    <div class="reason">❌ 2025-12-14は不可日(12/12-14); 2025-12-14は土日午前中(12月以降)</div>
+
+                </div>
+
+                <div class="schedule-item contact-needed">
+                    <div class="schedule-date">⚠️ 後藤 俊 (ID: 27)</div>
+
+                    <div class="schedule-time">優先度1: 2025-12-13 09:00-12:00</div>
+                    <div class="reason">❌ 2025-12-13は不可日(12/12-14); 2025-12-13は土日午前中(12月以降)</div>
+
+                    <div class="schedule-time">優先度2: 2025-12-20 09:00-12:00</div>
+                    <div class="reason">❌ 2025-12-20は土日午前中(12月以降)</div>
+
+                    <div class="schedule-time">優先度3: 2025-12-27 09:00-12:00</div>
+                    <div class="reason">❌ 2025-12-27は土日午前中(12月以降)</div>
+
+                </div>
+
+                <div class="schedule-item contact-needed">
+                    <div class="schedule-date">⚠️ ハヤシ (ID: 28)</div>
+
+                    <div class="schedule-time">優先度1: 2025-12-07 10:00-15:00</div>
+                    <div class="reason">❌ 2025-12-07は土日午前中(12月以降)</div>
+
+                    <div class="schedule-time">優先度2: 2025-12-06 10:30-17:30</div>
+                    <div class="reason">❌ 2025-12-06は土日午前中(12月以降)</div>
+
+                    <div class="schedule-time">優先度3: 2025-12-14 15:00-17:30</div>
+                    <div class="reason">❌ 2025-12-14は不可日(12/12-14)</div>
+
+                </div>
+
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2025 陸上アカデミア | 最終更新: 2025年11月26日 03:12</p>
+            <p style="margin-top: 10px;">✨ 朝9時スタートなし！最早開始時刻: 10:00</p>
+        </div>
+    </div>
+    
+    <script>
+        function showTab(event, tabName) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+    </script>
+</body>
+</html>
