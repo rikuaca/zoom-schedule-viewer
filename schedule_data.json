@@ -97,18 +97,6 @@
   },
   {
     "id": 9,
-    "name": "望月 雅貴",
-    "snsname": "雅MYRR",
-    "date": "2025-12-01",
-    "start_time": "17:30",
-    "end_time": "19:00",
-    "priority": 4,
-    "has_video": false,
-    "has_watched": false,
-    "candidate_num": 2
-  },
-  {
-    "id": 10,
     "name": "川村 桃香",
     "snsname": "Kawamura Miyoko",
     "date": "2025-12-05",
@@ -120,7 +108,7 @@
     "candidate_num": 3
   },
   {
-    "id": 11,
+    "id": 10,
     "name": "",
     "snsname": "ねこねこ",
     "date": "2025-12-06",
@@ -132,7 +120,7 @@
     "candidate_num": 1
   },
   {
-    "id": 12,
+    "id": 11,
     "name": "米山",
     "snsname": "Mayuri",
     "date": "2025-12-06",
@@ -144,7 +132,7 @@
     "candidate_num": 1
   },
   {
-    "id": 13,
+    "id": 12,
     "name": "板村",
     "snsname": "まき",
     "date": "2025-12-06",
@@ -156,7 +144,7 @@
     "candidate_num": 2
   },
   {
-    "id": 14,
+    "id": 13,
     "name": "原武 翔子",
     "snsname": "Shoko",
     "date": "2025-12-06",
@@ -168,7 +156,7 @@
     "candidate_num": 1
   },
   {
-    "id": 15,
+    "id": 14,
     "name": "ハヤシ",
     "snsname": "Ayuko.H",
     "date": "2025-12-06",
@@ -180,7 +168,7 @@
     "candidate_num": 2
   },
   {
-    "id": 16,
+    "id": 15,
     "name": "佐藤 研一",
     "snsname": "佐藤研一",
     "date": "2025-12-06",
@@ -192,7 +180,7 @@
     "candidate_num": 1
   },
   {
-    "id": 17,
+    "id": 16,
     "name": "石橋 麻希子",
     "snsname": "makiko",
     "date": "2025-12-07",
@@ -204,7 +192,7 @@
     "candidate_num": 2
   },
   {
-    "id": 18,
+    "id": 17,
     "name": "",
     "snsname": "*Meg*",
     "date": "2025-12-09",
@@ -216,7 +204,7 @@
     "candidate_num": 1
   },
   {
-    "id": 19,
+    "id": 18,
     "name": "",
     "snsname": "SAKAMOTO",
     "date": "2025-12-09",
@@ -228,7 +216,7 @@
     "candidate_num": 2
   },
   {
-    "id": 20,
+    "id": 19,
     "name": "佐藤",
     "snsname": "よっしぃ",
     "date": "2025-12-09",
@@ -240,7 +228,7 @@
     "candidate_num": 1
   },
   {
-    "id": 21,
+    "id": 20,
     "name": "井下田、5. ありがとうございました。走りについて論理的な説明を初めて聞いて勉強になりました。ただ走っていた時代からすると、聞いただけでも早く走れそうな気がします。 征嗣",
     "snsname": "IGETA S",
     "date": "2025-12-11",
@@ -252,7 +240,7 @@
     "candidate_num": 2
   },
   {
-    "id": 22,
+    "id": 21,
     "name": "",
     "snsname": "西川菜穂子",
     "date": "2025-12-15",
@@ -264,7 +252,7 @@
     "candidate_num": 1
   },
   {
-    "id": 23,
+    "id": 22,
     "name": "大橋",
     "snsname": "史子",
     "date": "2025-12-15",
@@ -276,7 +264,7 @@
     "candidate_num": 3
   },
   {
-    "id": 24,
+    "id": 23,
     "name": "藤川",
     "snsname": "M Fuji",
     "date": "2025-12-17",
@@ -288,7 +276,7 @@
     "candidate_num": 1
   },
   {
-    "id": 25,
+    "id": 24,
     "name": "寺崎 英利子",
     "snsname": "えりこ",
     "date": "2025-12-18",
@@ -300,7 +288,7 @@
     "candidate_num": 1
   },
   {
-    "id": 26,
+    "id": 25,
     "name": "酒屋 恵理",
     "snsname": "酒屋恵理",
     "date": "2025-12-18",
@@ -312,7 +300,7 @@
     "candidate_num": 3
   },
   {
-    "id": 27,
+    "id": 26,
     "name": "山下 真由美",
     "snsname": "☆Mayu☆",
     "date": "2025-12-20",
@@ -324,7 +312,7 @@
     "candidate_num": 2
   },
   {
-    "id": 28,
+    "id": 27,
     "name": "",
     "snsname": "かすみ",
     "date": "2025-12-20",
@@ -336,7 +324,7 @@
     "candidate_num": 2
   },
   {
-    "id": 29,
+    "id": 28,
     "name": "河田 彩世",
     "snsname": "Sayo Kawada",
     "date": "2025-12-22",
@@ -348,7 +336,7 @@
     "candidate_num": 1
   },
   {
-    "id": 30,
+    "id": 29,
     "name": "",
     "snsname": "tamie",
     "date": "2025-12-23",
@@ -358,5 +346,17 @@
     "has_video": false,
     "has_watched": false,
     "candidate_num": 1
+  },
+  {
+    "id": 30,
+    "name": "望月 雅貴",
+    "snsname": "雅MYRR",
+    "date": "2025-12-25",
+    "start_time": "17:30",
+    "end_time": "19:00",
+    "priority": 4,
+    "has_video": false,
+    "has_watched": false,
+    "candidate_num": 2
   }
 ]
